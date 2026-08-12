@@ -4,6 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<WeatherApiOptions>(builder.Configuration.GetSection("weatherapi"));
 builder.Services.Configure<MyKeyOptions>(builder.Configuration.GetSection("mykey"));
+builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    config.AddJsonFile("MYconfig.json", optional: true, reloadOnChange: true);
+
+});
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();
